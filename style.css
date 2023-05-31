@@ -1,0 +1,94 @@
+.white_text{
+    color: #ffffff;
+}
+.navbar-brand:hover{
+    color: #ffda6a;
+}
+.busket, .user_sign{
+    /* background-color: #ffffff; */
+    padding: 2px;
+    border-radius: 3px;
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    /* background-color: red; */
+}
+.busket:hover, .user_sign:hover{
+    /* background-color: #212529; */
+    
+    background-color: #524a42;
+    padding: 2px;
+    border-radius: 3px;
+}
+.catalog-sidebar{
+    /* width: 200px; */
+    max-width: 220px;
+}
+#carouselExampleInterval{
+    max-height: 100px;
+    overflow: hidden;
+}
+.carousel-photo{
+    height: 100px;
+}
+.sidebar-title{
+    font-size: 18px;
+}
+.sidebar-text{
+    font-size: 12px;
+}
+.footer-caption{
+    font-weight: bold;
+}
+.rm-price-input{
+    width: 60px;
+}
+.sidebar-parag-title{
+    font-weight: bold;
+    font-size: 14px;
+}
+.sidebar-link{
+    color: #212529;
+    background-color: transparent;
+    text-decoration: none;
+}
+/* .button-account{} */
+.modal-local{
+    /* display:none; */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1024; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    /* width: 40%; 
+    max-width: 450px;
+    min-width: 350px; */
+    width: 450px;
+  }
+.user_data_input{
+    border-radius: 6px;
+    /* border: 2px; */
+    width: 100%;
+    min-width: 230px;
+    /* max-width: 320px; */
+}
+/* .modal-account{
+    width:50%;
+} */
+.modal-footer{
+    margin-top: 24px;
+}
+.searchfield{
+    max-width: 300px;
+    min-width: 450px;
+}
