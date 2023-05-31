@@ -28,18 +28,18 @@ window.onclick = function(event) {
   if (event.target == account_modal) {
     account_modal.style.display = "none";
   }
-  else if (event.target == busket_modal) {
-    busket_modal.style.display = "none";
+  else if (event.target == cart_modal) {
+    cart_modal.style.display = "none";
   }
 }
 
 
-let busket_modal = document.getElementById("busket-modal");
-document.getElementById("clickable-div-busket").addEventListener("click", (event) => {
-  busket_modal.style.display = "block";
+let cart_modal = document.getElementById("cart-modal");
+document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
+  cart_modal.style.display = "block";
 });
 document.getElementsByClassName("btn-close")[0].addEventListener("click", (e)=>{
-  busket_modal.style.display="none";
+  cart_modal.style.display="none";
 });
 // window.onclick = function(event) {
 //   if (event.target == busket_modal) {
