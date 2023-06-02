@@ -33,7 +33,6 @@ window.onclick = function(event) {
   }
 }
 
-
 let cart_modal = document.getElementById("cart-modal");
 document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
   cart_modal.style.display = "block";
@@ -41,8 +40,30 @@ document.getElementById("clickable-div-cart").addEventListener("click", (event) 
 document.getElementsByClassName("btn-close")[0].addEventListener("click", (e)=>{
   cart_modal.style.display="none";
 });
-// window.onclick = function(event) {
-//   if (event.target == busket_modal) {
-//     busket_modal.style.display = "none";
-//   }
-// };
+
+document.getElementById("submit_login").addEventListener("click", (event) => {
+  let user_email_login_value = document.getElementById("user_email_login").value;
+  let user_pass_login_value = document.getElementById("user_pass_login").value;
+
+  let loginData = {
+    "user_email": user_email_login_value,
+    "user_pass": user_pass_login_value 
+  }
+  console.log(JSON.stringify(loginData));
+  account_modal.style.display = "none";
+});
+
+document.getElementById("submit_sighup").addEventListener("click", (event) => {
+  let user_email_signup_value = document.getElementById("user_email_signup").value;
+  let user_pass_signup_value = document.getElementById("user_pass_signup").value;
+  let user_pass_rep_signup_value = document.getElementById("user_pass_rep_signup").value;
+
+  let loginData = {
+    "user_email": user_email_signup_value,
+    "user_pass": user_pass_signup_value 
+  }
+  console.log(JSON.stringify(loginData));
+
+  account_modal.style.display = "none";
+  
+});
