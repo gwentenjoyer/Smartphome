@@ -1,6 +1,5 @@
 document.getElementById("navbar-search-button").addEventListener("click", function (event) {
   event.preventDefault();
-  // document.getElementsByClassName('cards-container')[0].appendChild('sdfasdfasgdedg');
   document.getElementById('cards_container').innerHTML += `
         <div class="card m-2" style="width: 18rem;">
             <img src="/img/001.jpg" class="card-img-top" alt="...">
@@ -14,23 +13,33 @@ document.getElementById("navbar-search-button").addEventListener("click", functi
         </div>
     `;
 });
-// modal-product-info
-// cards_container
+
+let allModals = document.getElementsByClassName("modal-local");
+let closeButtons = document.getElementsByClassName('modal-button-close');
+
 let account_modal = document.getElementById("account-modal");
 document.getElementById("clickable-div-account").addEventListener("click",
   (event) => { account_modal.style.display = "block"; });
 
-document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
-  (event) => { account_modal.style.display = "none"; });
-document.getElementsByClassName("modal-button-close")[1].addEventListener("click",
-  (event) => { account_modal.style.display = "none"; });
+for (el of closeButtons) {
+  el.addEventListener("click", (event) => {
+    for (elem of allModals) {
+      elem.style.display = "none";
+    }
+  })
+}
 
 window.onclick = function (event) {
-  if (event.target == account_modal) {
-    account_modal.style.display = "none";
-  }
-  else if (event.target == cart_modal) {
-    cart_modal.style.display = "none";
+  switch (event.target) {
+    case account_modal:
+      account_modal.style.display = "none";
+      break;
+    case cart_modal:
+      cart_modal.style.display = "none";
+      break;
+    case modal_product_info:
+      modal_product_info.style.display = "none";
+      break;
   }
 }
 
@@ -42,7 +51,9 @@ document.getElementsByClassName("btn-close")[0].addEventListener("click", (e) =>
   cart_modal.style.display = "none";
 });
 
-// let emailReg = new RegExp('\w{4,18}@\w{2,8}\.[a-z]{2,3}');
 const emailReg = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-let emailExample = "bokuwaikitei@gmail.com";
-// console.log("res: ", emailReg.test(emailExample));
+
+let modal_product_info = document.getElementById("modal-product-info");
+document.getElementById("clickable-div-create").addEventListener("click", (e) => {
+  modal_product_info.style.display = "block";
+});
