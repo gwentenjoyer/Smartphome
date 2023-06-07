@@ -293,7 +293,7 @@
     </div>
     <div class="modal-local  modal-cart" id="cart-modal">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header mb-2">
                 <h1 class="modal-title fs-5">Cart</h1>
                 <button type="button" class="btn-close"></button>
             </div>
@@ -311,16 +311,94 @@
 
     <div class="modal-local" id="modal-product-info">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Add new produc</h1>
-                <button type="button" class="btn-close"></button>
+            <div class="modal-header mb-2">
+                <h1 class="modal-title fs-5">Add new product</h1>
+                <button type="button" class="btn-close" id="modal-product-info-close-cross"></button>
             </div>
             <div class="modal-body d-flex flex-column align-items-center">
-                ...
+                <table id="product-info-table">
+                    <tr>
+                        <td>
+                            <label for="product-info-manufacturer" class=""><b>Manufacturer</b></label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Company" id="product-info-manufacturer"
+                                aria-describedby="addon-wrapping">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-model" class=""><b>Model</b></label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Model" id="product-info-model"
+                                aria-describedby="addon-wrapping">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-diagonal" class=""><b>Diagonal, inches</b></label>
+                        </td>
+                        <td>
+                            <select class="form-select" id="product-info-diagonal">
+                                <option value="0" selected="selected">Select value</option>
+                                <option value="4.3">4,3"</option>
+                                <option value="4.7">4.7"</option>
+                            </select>
+                            <!-- <input type="text" id="textBox" readonly> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-processor" class=""><b>Processor</b></label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Processor" id="product-info-processor"
+                                aria-describedby="addon-wrapping">
+                                <!-- <select id="product-info-processor" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-ram" class=""><b>RAM</b></label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="RAM" id="product-info-ram"
+                                aria-describedby="addon-wrapping">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-rom" class=""><b>ROM</b></label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Embedded memory"
+                                id="product-info-rom" aria-describedby="addon-wrapping">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <img id="product-info-picture-preview" src="#" height="256px" alt="preview"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="product-info-picture" class=""><b>Phone image</b></label>
+                        </td>
+                        <td>
+                            <input type="file" class="form-control" id="product-info-picture" aria-describedby="addon-wrapping">
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer d-flex flex-row justify-content-center ">
-                <button type="button" class="btn btn-secondary modal-button-close w-25">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-secondary modal-button-close w-25">Close</button> -->
+                <button type="button" class="btn btn-primary" id="product-info-submit">Save changes</button>
             </div>
         </div>
     </div>

@@ -92,3 +92,10 @@
     max-width: 300px;
     min-width: 450px;
 }
+
+#product-info-table td{
+    margin-top: 5px;
+}
+#product-info-picture-preview{
+    margin: 8px;
+}

@@ -21,13 +21,18 @@ let account_modal = document.getElementById("account-modal");
 document.getElementById("clickable-div-account").addEventListener("click",
   (event) => { account_modal.style.display = "block"; });
 
-for (el of closeButtons) {
-  el.addEventListener("click", (event) => {
-    for (elem of allModals) {
-      elem.style.display = "none";
-    }
-  })
-}
+document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
+  (event) => { account_modal.style.display = "none"; });
+document.getElementsByClassName("modal-button-close")[1].addEventListener("click",
+  (event) => { account_modal.style.display = "none"; });
+
+// for (el of closeButtons) {
+//   el.addEventListener("click", (event) => {
+//     for (elem of allModals) {
+//       elem.style.display = "none";
+//     }
+//   })
+// }
 
 window.onclick = function (event) {
   switch (event.target) {
@@ -56,4 +61,47 @@ const emailReg = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 let modal_product_info = document.getElementById("modal-product-info");
 document.getElementById("clickable-div-create").addEventListener("click", (e) => {
   modal_product_info.style.display = "block";
+});
+
+document.getElementById("modal-product-info-close-cross").addEventListener("click",
+(event) => { modal_product_info.style.display = "none"; });
+
+// todo function to check if creation/editon modals changed. verifuing changes
+
+let product_info_diagonal_state = "0";
+  const dropDown = document.getElementById('product-info-diagonal');
+  // const textBox = document.getElementById('textBox');
+
+  dropDown.addEventListener('change', (event) => {
+    product_info_diagonal_state = event.target.value;
+    console.log("dropdown", event.target.value);
+    // textBox.value = event.target.value;
+   });
+let prodPicInp = document.getElementById("product-info-picture");
+let prodPicPrev = document.getElementById("product-info-picture-preview");
+prodPicInp.onchange = evt => {
+    const [file] = prodPicInp.files;
+    if (file) {
+      prodPicPrev.src = URL.createObjectURL(file);
+      console.log(file);
+      // console.log(prodPicInp.files);
+      console.log(URL.createObjectURL(file));
+    }
+  }
+  // console.log(prodPicInp.files);
+
+let product_info_picture_input = document.getElementById("product-info-picture");
+
+let product_info_submit = document.getElementById("product-info-submit");
+
+product_info_submit.addEventListener("click", (event) =>{
+  let createData = {
+    manufacturer: document.getElementById("product-info-manufacturer").value,
+    model: document.getElementById("product-info-model").value,
+    diagonal: product_info_diagonal_state,
+    cpu: document.getElementById("product-info-processor").value,
+    ram: document.getElementById("product-info-ram").value,
+    rom: document.getElementById("product-info-rom").value
+  };
+  console.log(createData);
 });
