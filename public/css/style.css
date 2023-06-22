@@ -97,5 +97,7 @@
     margin-top: 5px;
 }
 #product-info-picture-preview{
-    margin: 8px;
+    margin: 8px 4px;
+    max-width: 400px;
 }
+
