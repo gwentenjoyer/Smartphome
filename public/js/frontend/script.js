@@ -70,12 +70,10 @@ document.getElementById("modal-product-info-close-cross").addEventListener("clic
 
 let product_info_diagonal_state = "0";
 const dropDown = document.getElementById('product-info-diagonal');
-// const textBox = document.getElementById('textBox');
 
 dropDown.addEventListener('change', (event) => {
   product_info_diagonal_state = event.target.value;
-  console.log("dropdown", event.target.value);
-  // textBox.value = event.target.value;
+  // console.log("dropdown", event.target.value);
 });
 let prodPicInp = document.getElementById("product-info-picture");
 let prodPicPrev = document.getElementById("product-info-picture-preview");
@@ -83,81 +81,11 @@ prodPicInp.onchange = evt => {
   const [file] = prodPicInp.files;
   if (file) {
     prodPicPrev.src = URL.createObjectURL(file);
-    // console.log(file);
-    // // console.log(prodPicInp.files);
-    // console.log(URL.createObjectURL(file));
   }
 }
-// console.log(prodPicInp.files);
 
 let product_info_picture_input = document.getElementById("product-info-picture");
-
 let product_info_submit = document.getElementById("product-info-submit");
-
-product_info_submit.addEventListener("click", (event) => {
-  let isEmptyFlag = false
-  // let formData = {
-  //   manufacturer: document.getElementById("product-info-manufacturer").value,
-  //   model: document.getElementById("product-info-model").value,
-  //   diagonal: product_info_diagonal_state,
-  //   cpu: document.getElementById("product-info-processor").value,
-  //   ram: document.getElementById("product-info-ram").value,
-  //   rom: document.getElementById("product-info-rom").value
-  // };
-  // // console.log(createData);
-  // for (let key of Object.keys(createData)) {
-  //   if (Number(createData[key]) == 0) {
-  //     isEmptyFlag = true;
-  //     break;
-  //   }
-  // }
-  // const productForm = document.forms["productForm"];
-  // let formData = new FormData(productForm);
-  // // let formData = new FormData(document.getElementById('idProductForm'));
-  // console.log(JSON.stringify(formData), formData);
-  // var form = document.getElementById('idProductForm');
-  // var formData = new FormData(form);
-
-  // var imageInput = document.getElementById('product-info-picture');
-  // var imageFile = imageInput.files[0];
-  // formData.append('image', imageFile);
-
-  const form = document.getElementById('idProductForm'); // Replace 'myForm' with the ID of your form
-  const formData = new FormData(form);
-
-
-  for (let key of Object.keys(formData)) {
-    if (Number(formData[key]) == 0) {
-      isEmptyFlag = true;
-      break;
-    }
-  }
-  if (isEmptyFlag) {
-    // console.log("Fields cannot be empty!");
-    showCreateEmptyWarn();
-  }
-  else {
-    console.log("Fields are filled, sending data to the server...", JSON.stringify(formData), formData);
-    fetch("/products/add_new", {
-      method: 'POST',
-      headers: {
-        // 'Content-Type': 'application/json'
-        // ,'Access-Control-Allow-Headers': '*'
-      },
-      // body: JSON.stringify(formData)
-      body: formData
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else {
-        console.log("error occured while sending add_new data");
-      }
-    }).then(data => console.log("Server's response: ", data));
-    // formData.reset();
-  }
-
-});
 
 function showCreateEmptyWarn() {   // bool here?
   let elem = document.getElementById("emptyfield");
