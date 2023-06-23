@@ -5,4 +5,4 @@ const schemaUser = new mongoose.Schema({
     user_password:{type:String, required:true},
     role:{type:String, required:true}
 })
-export default mongoose.model("schemaUser", schemaUser);
+export default mongoose.model("SchemaUser", schemaUser, "users");

@@ -1,17 +1,33 @@
-document.getElementById("navbar-search-button").addEventListener("click", function (event) {
+document.getElementById("navbar-search-button").addEventListener("click", async function (event) {
   event.preventDefault();
-  document.getElementById('cards_container').innerHTML += `
-        <div class="card m-2" style="width: 18rem;">
-            <img src="/img/001.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the
-                    bulk
-                    of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+
+  fetch("/products/list", {
+    method: 'GET'
+  }).then((res) => {
+    if (res.ok) {
+      // console.log(res.body.json)
+      return res.json()
+    }
+    else {
+      console.log("error occured: wrong login data");
+    }
+  }).then((data) => {
+    console.log(data);
+    for (let el of data) {
+      document.getElementById('cards_container').innerHTML += `
+        <div class="card m-1 d-flex flex-column align-items-center h-100" style="width: 18rem;">
+          <div>
+            <img src="${el.clPublicLink}" class="card-img-top" alt="phone_photo">
+          </div>
+          <div class="card-body d-flex flex-column align-items-center">
+              <h5 class="card-title card-model-title">${el.manufacturer}</h5>
+              <p class="card-text card-model-version">${el.model}</p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
         </div>
-    `;
+      `;
+    }
+  })
 });
 
 let allModals = document.getElementsByClassName("modal-local");
@@ -64,7 +80,10 @@ document.getElementById("clickable-div-create").addEventListener("click", (e) =>
 });
 
 document.getElementById("modal-product-info-close-cross").addEventListener("click",
-  (event) => { modal_product_info.style.display = "none"; });
+  (event) => {
+    document.forms["productForm"].reset()
+    modal_product_info.style.display = "none";
+  });
 
 // todo function to check if creation/editon modals changed. verifuing changes
 
