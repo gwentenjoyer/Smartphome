@@ -7,6 +7,7 @@ const schemaProduct = new mongoose.Schema({
     cpu:{type:String},
     ram:{type:Number},
     rom:{type:Number},
+    price:{type:Number},
     clPublicLink:{type:String, required:true}
 })
 export default mongoose.model("SchemaProduct", schemaProduct, 'products');

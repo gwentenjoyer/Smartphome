@@ -16,10 +16,10 @@ mongoose.connect(ATLAS_DB,
     // console.log("project folder " + __dirname);
     console.log("Connected to Atlas");
     // console.log(mongoose.connection);
-    const db = mongoose.connection;
-    console.log('Назва бази даних:', db.name);
-    console.log('URL бази даних:', db.host);
-    console.log('Порт бази даних:', db.port);
+    // const db = mongoose.connection;
+    // console.log('Назва бази даних:', db.name);
+    // console.log('URL бази даних:', db.host);
+    // console.log('Порт бази даних:', db.port);
 })
 .catch((e) => {console.error(e)});
 

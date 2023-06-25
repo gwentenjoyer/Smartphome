@@ -1,6 +1,7 @@
-document.getElementById("navbar-search-button").addEventListener("click", async function (event) {
-  event.preventDefault();
-
+// document.getElementById("navbar-search-button").addEventListener("click");
+let modal_product_view = document.getElementById("modal-product-view");
+const cards_container = document.getElementById('cards_container');
+(async function (event) {
   fetch("/products/list", {
     method: 'GET'
   }).then((res) => {
@@ -12,30 +13,63 @@ document.getElementById("navbar-search-button").addEventListener("click", async 
       console.log("error occured: wrong login data");
     }
   }).then((data) => {
-    console.log(data);
+    // sessionStorage.setItem("products", JSON.stringify(data));
+    // console.log(sessionStorage.getItem("products"));
+    // debugger;
     for (let el of data) {
-      document.getElementById('cards_container').innerHTML += `
-        <div class="card m-1 d-flex flex-column align-items-center h-100" style="width: 18rem;">
-          <div>
-            <img src="${el.clPublicLink}" class="card-img-top" alt="phone_photo">
+      let card = document.createElement('div');
+      card.innerHTML = `
+        <div id="${el._id}" class="card m-1 d-flex flex-column align-items-center h-100 productInstance" style="width: 18rem;">
+          <div style="height: 390px;" class="d-flex justify-content-center">
+            <img src="${el.clPublicLink}"  style="max-width: 390px; object-fit: contain;" class="card-img-top" alt="phone_photo">
           </div>
           <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="card-title card-model-title">${el.manufacturer}</h5>
-              <p class="card-text card-model-version">${el.model}</p>
-              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              <h5 class="card-title card-model-title">${el.manufacturer + " " + el.model}</h5>
+              <p class="card-text card-model-version">${el.price}грн.</p>
+              <!-- <a class="card-text card-model-version route-link" href="?id=${el._id}">${el.price}грн.</a> -->
           </div>
         </div>
       `;
+      card.addEventListener("click", () => {
+        modal_product_view.style.display = "flex";
+        document.getElementById("product-view-manufacturer").innerHTML = el.manufacturer;
+        document.getElementById("product-view-model").innerHTML = el.model;
+        document.getElementById("product-view-diagonal").innerHTML = el.diagonal;
+        document.getElementById("product-view-cpu").innerHTML = el.cpu;
+        document.getElementById("product-view-ram").innerHTML = el.ram;
+        document.getElementById("product-view-rom").innerHTML = el.rom;
+        document.getElementById("product-view-price").innerHTML = el.price;
+        document.getElementById("product-view-picture-preview").src = el.clPublicLink;        
+      });
+      cards_container.appendChild(card);
     }
+  //   document.getElementsByClassName[0].addEventListener("click", (e) => {
+  //     event.preventDefault(); // Відміна переходу за замовчуванням
+
+  //   const url = link.getAttribute('href'); // Отримання URL з атрибуту href
+
+  //   // Зміна URL без перезавантаження сторінки
+  //   history.pushState(null, null, url);
+
+  //   // Виклик функції для завантаження вмісту нового роуту
+  //   loadRouteContent(url);
+  // });
+    
   })
+}());
+
+document.getElementById("product-view-delete").addEventListener("click", () => {
+  
 });
+
 
 let allModals = document.getElementsByClassName("modal-local");
 let closeButtons = document.getElementsByClassName('modal-button-close');
 
 let account_modal = document.getElementById("account-modal");
 document.getElementById("clickable-div-account").addEventListener("click",
-  (event) => { account_modal.style.display = "block"; });
+  // (event) => { account_modal.style.display = "block"; });
+  (event) => { account_modal.style.display = "flex"; });
 
 document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
   (event) => { account_modal.style.display = "none"; });
@@ -58,15 +92,20 @@ window.onclick = function (event) {
     case cart_modal:
       cart_modal.style.display = "none";
       break;
-    case modal_product_info:
-      modal_product_info.style.display = "none";
+    case modal_product_view:
+      modal_product_view.style.display = "none";
       break;
+    // case modal_product_info:
+    //   // modal_product_info.style.display = "none";
+    //   closeProdForm();
+    //   break;
   }
 }
 
 let cart_modal = document.getElementById("cart-modal");
 document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
-  cart_modal.style.display = "block";
+  // cart_modal.style.display = "block";
+  cart_modal.style.display = "flex";
 });
 document.getElementsByClassName("btn-close")[0].addEventListener("click", (e) => {
   cart_modal.style.display = "none";
@@ -76,13 +115,15 @@ const emailReg = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 let modal_product_info = document.getElementById("modal-product-info");
 document.getElementById("clickable-div-create").addEventListener("click", (e) => {
-  modal_product_info.style.display = "block";
+  // modal_product_info.style.display = "block";
+  modal_product_info.style.display = "flex";
 });
 
 document.getElementById("modal-product-info-close-cross").addEventListener("click",
   (event) => {
-    document.forms["productForm"].reset()
-    modal_product_info.style.display = "none";
+    // document.forms["productForm"].reset()
+    // modal_product_info.style.display = "none";
+    closeProdForm();
   });
 
 // todo function to check if creation/editon modals changed. verifuing changes
@@ -97,6 +138,7 @@ dropDown.addEventListener('change', (event) => {
 let prodPicInp = document.getElementById("product-info-picture");
 let prodPicPrev = document.getElementById("product-info-picture-preview");
 prodPicInp.onchange = evt => {
+  prodPicPrev.style.display = "inline";
   const [file] = prodPicInp.files;
   if (file) {
     prodPicPrev.src = URL.createObjectURL(file);
@@ -105,8 +147,16 @@ prodPicInp.onchange = evt => {
 
 let product_info_picture_input = document.getElementById("product-info-picture");
 let product_info_submit = document.getElementById("product-info-submit");
+let emptyFieldAlarm = document.getElementById("emptyfield");
 
 function showCreateEmptyWarn() {   // bool here?
-  let elem = document.getElementById("emptyfield");
-  elem.style.display = "block";
+  emptyFieldAlarm.style.display = "block";
+}  
+
+function closeProdForm(){
+  document.forms["productForm"].reset();
+  prodPicPrev.style.display = "none";
+  prodPicPrev.src = "#";
+  modal_product_info.style.display = "none";
+  emptyFieldAlarm.style.display = "none";
 }

@@ -63,33 +63,42 @@ document.getElementById("submit_signup").addEventListener("click", (event) => {
     // account_modal.style.display = "none";
 });
 
-product_info_submit.addEventListener("click", (event) => {
-    let isEmptyFlag = false
+product_info_submit.addEventListener("click", async (event) => {
     const formData = new FormData(document.getElementById('idProductForm'));
-  
-  
-    for (let key of Object.keys(formData)) {
-      if (Number(formData[key]) == 0) {
-        isEmptyFlag = true;
-        break;
-      }
-    }
-    if (isEmptyFlag) {
-      showCreateEmptyWarn();
+    if (validateProductForm(formData)) {
+        console.log("failed")
+        showCreateEmptyWarn();
     }
     else {
-      // console.log("Fields are filled, sending data to the server...");
-      fetch("/products/add_new", {
-        method: 'POST',
-        body: formData
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        else {
-          console.log("error occured while sending add_new data");
-        }
-      }).then(data => console.log("Server's response: ", data));
+        // console.log("Fields are filled, sending data to the server...");
+        // debugger;
+        fetch("/products/add_new", {
+            method: 'POST',
+            body: formData
+        }).then((res) => {
+            if (res.ok) {
+                //   return res.json();
+                console.log("Successfully writed.");
+                closeProdForm();
+            }
+            else {
+                console.log("error occured while sending add_new data");
+            }
+        })
+        //   .then(data => console.log("Server's response: ", data));
     }
-  
-  });
+
+});
+
+function validateProductForm(formdata){
+    let isEmptyFlag = false;
+    formdata.delete("image");
+    for (let value of formdata.values()) {
+        console.log(value)
+        if (value.trim() === "") {
+            isEmptyFlag = true;
+          break;
+        }
+      }
+    return isEmptyFlag;
+}
