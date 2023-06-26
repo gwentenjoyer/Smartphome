@@ -39,6 +39,7 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
   modal_product_info_header.innerHTML = "Edit product";
   product_info_button_container.innerHTML = 
   `<button type="button" class="btn btn-warning" id="product-info-edit">Update data</button>`;
+
   document.getElementById("product-info-edit").addEventListener("click", () => {
     const formData = new FormData(document.getElementById('idProductForm'));
     prepareFormData(formData);
@@ -64,6 +65,16 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
         })
     }
   });
+  const prodObj = JSON.parse(sessionStorage.getItem("products")).find(obj => obj._id === sessionStorage.getItem("currentItem"));
+  document.getElementById("product-info-manufacturer").value = prodObj.manufacturer;
+  document.getElementById("product-info-model").value = prodObj.model;
+  document.getElementById("product-info-diagonal").value = prodObj.diagonal;
+  document.getElementById("product-info-processor").value = prodObj.cpu;
+  document.getElementById("product-info-ram").value = prodObj.ram;
+  document.getElementById("product-info-rom").value = prodObj.rom;
+  document.getElementById("product-info-price").value = prodObj.price;
+  document.getElementById("product-info-picture-preview").src = prodObj.clPublicLink;
+  document.getElementById("product-info-picture-preview").style.display = "inline";
   modal_product_info.style.display = "flex";
 });
 
@@ -82,7 +93,7 @@ function validateProductForm(){
     let isEmptyFlag = false;
     fdata.delete("image");
     for (let value of fdata.values()) {
-        console.log(value)
+        // console.log(value)
         if (value.trim() === "") {
             isEmptyFlag = true;
           break;

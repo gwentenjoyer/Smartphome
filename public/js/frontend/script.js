@@ -49,6 +49,7 @@ async function refreshProducts (event) {
   })
 };
 refreshProducts();
+
 function openModal() {
   // Show the modal by modifying the styles or classes of the modal elements
 
