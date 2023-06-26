@@ -51,16 +51,13 @@ async function refreshProducts (event) {
 refreshProducts();
 
 function openModal() {
-  // Show the modal by modifying the styles or classes of the modal elements
-
-  // For example, change the display style of an element with the id 'modal' to 'block'
   const modal = document.getElementById('modal');
   modal.style.display = 'block';
 }
 
 document.getElementById("product-view-delete").addEventListener("click", () => {
   const delElementId = document.getElementById("product-view-id").innerHTML;
-  console.log(delElementId);
+  // console.log(delElementId);
   fetch("/products/deleteProduct", {
     method: 'DELETE',
     headers: {
@@ -125,9 +122,6 @@ document.getElementById("clickable-div-cart").addEventListener("click", (event) 
 document.getElementsByClassName("btn-close")[0].addEventListener("click", (e) => {
   cart_modal.style.display = "none";
 });
-
-const emailReg = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-
 
 document.getElementById("modal-product-info-close-cross").addEventListener("click", (event) => {closeProdForm();});
 

@@ -80,13 +80,13 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
 
 
 function prepareFormData(fdata){
-    console.log("before", ...fdata);
+    // console.log("before", ...fdata);
       for (let [key, value] of fdata.entries()) {
         if (!(value instanceof File)) {
             fdata.set(key, value.trim());
         }
       }
-      console.log("before", ...fdata);
+    //   console.log("before", ...fdata);
 }
 function validateProductForm(){
     const fdata = new FormData(document.getElementById('idProductForm'));

@@ -1,3 +1,5 @@
+const emailReg = new RegExp('[a-z_0-9]+@[a-z]+\.[a-z]+');
+
 document.getElementById("submit_login").addEventListener("click", (event) => {
     let user_email_login_value = document.getElementById("user_email_login").value;
     let user_pass_login_value = document.getElementById("user_pass_login").value;
