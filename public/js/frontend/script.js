@@ -1,7 +1,7 @@
 // document.getElementById("navbar-search-button").addEventListener("click");
 let modal_product_view = document.getElementById("modal-product-view");
 const cards_container = document.getElementById('cards_container');
-(async function (event) {
+async function refreshProducts (event) {
   fetch("/products/list", {
     method: 'GET'
   }).then((res) => {
@@ -13,9 +13,10 @@ const cards_container = document.getElementById('cards_container');
       console.log("error occured: wrong login data");
     }
   }).then((data) => {
-    // sessionStorage.setItem("products", JSON.stringify(data));
+    sessionStorage.setItem("products", JSON.stringify(data));
     // console.log(sessionStorage.getItem("products"));
     // debugger;
+    cards_container.innerHTML = "";
     for (let el of data) {
       let card = document.createElement('div');
       card.innerHTML = `
@@ -31,6 +32,7 @@ const cards_container = document.getElementById('cards_container');
         </div>
       `;
       card.addEventListener("click", () => {
+        sessionStorage.setItem("currentItem", el._id);
         modal_product_view.style.display = "flex";
         document.getElementById("product-view-manufacturer").innerHTML = el.manufacturer;
         document.getElementById("product-view-model").innerHTML = el.model;
@@ -39,27 +41,39 @@ const cards_container = document.getElementById('cards_container');
         document.getElementById("product-view-ram").innerHTML = el.ram;
         document.getElementById("product-view-rom").innerHTML = el.rom;
         document.getElementById("product-view-price").innerHTML = el.price;
-        document.getElementById("product-view-picture-preview").src = el.clPublicLink;        
+        document.getElementById("product-view-picture-preview").src = el.clPublicLink;
+        document.getElementById("product-view-id").innerHTML = el._id;  
       });
       cards_container.appendChild(card);
     }
-  //   document.getElementsByClassName[0].addEventListener("click", (e) => {
-  //     event.preventDefault(); // Відміна переходу за замовчуванням
-
-  //   const url = link.getAttribute('href'); // Отримання URL з атрибуту href
-
-  //   // Зміна URL без перезавантаження сторінки
-  //   history.pushState(null, null, url);
-
-  //   // Виклик функції для завантаження вмісту нового роуту
-  //   loadRouteContent(url);
-  // });
-    
   })
-}());
+};
+refreshProducts();
+function openModal() {
+  // Show the modal by modifying the styles or classes of the modal elements
+
+  // For example, change the display style of an element with the id 'modal' to 'block'
+  const modal = document.getElementById('modal');
+  modal.style.display = 'block';
+}
 
 document.getElementById("product-view-delete").addEventListener("click", () => {
-  
+  const delElementId = document.getElementById("product-view-id").innerHTML;
+  console.log(delElementId);
+  fetch("/products/deleteProduct", {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({delElementId})
+  }).then((res) => {
+    if (res.ok) {
+      modal_product_view.style.display = "none";
+      console.log("Successfully deleted product.")
+      refreshProducts();
+    }
+    else {console.log("error emmited while deleting")}
+    })
 });
 
 
@@ -113,27 +127,14 @@ document.getElementsByClassName("btn-close")[0].addEventListener("click", (e) =>
 
 const emailReg = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
-let modal_product_info = document.getElementById("modal-product-info");
-document.getElementById("clickable-div-create").addEventListener("click", (e) => {
-  // modal_product_info.style.display = "block";
-  modal_product_info.style.display = "flex";
-});
 
-document.getElementById("modal-product-info-close-cross").addEventListener("click",
-  (event) => {
-    // document.forms["productForm"].reset()
-    // modal_product_info.style.display = "none";
-    closeProdForm();
-  });
-
-// todo function to check if creation/editon modals changed. verifuing changes
+document.getElementById("modal-product-info-close-cross").addEventListener("click", (event) => {closeProdForm();});
 
 let product_info_diagonal_state = "0";
 const dropDown = document.getElementById('product-info-diagonal');
 
 dropDown.addEventListener('change', (event) => {
   product_info_diagonal_state = event.target.value;
-  // console.log("dropdown", event.target.value);
 });
 let prodPicInp = document.getElementById("product-info-picture");
 let prodPicPrev = document.getElementById("product-info-picture-preview");
@@ -146,8 +147,9 @@ prodPicInp.onchange = evt => {
 }
 
 let product_info_picture_input = document.getElementById("product-info-picture");
-let product_info_submit = document.getElementById("product-info-submit");
+// let product_info_submit = document.getElementById("product-info-submit");
 let emptyFieldAlarm = document.getElementById("emptyfield");
+let product_view_edit = document.getElementById("product-view-edit");
 
 function showCreateEmptyWarn() {   // bool here?
   emptyFieldAlarm.style.display = "block";
