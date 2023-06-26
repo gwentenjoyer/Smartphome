@@ -13,7 +13,7 @@ document.getElementById("clickable-div-create").addEventListener("click", (e) =>
         showCreateEmptyWarn();
     }
     else {
-        fetch("/products/add_new", {
+        fetch("/products/addNew", {
             method: 'POST',
             body: formData
         }).then((res) => {
@@ -42,19 +42,21 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
   document.getElementById("product-info-edit").addEventListener("click", () => {
     const formData = new FormData(document.getElementById('idProductForm'));
     prepareFormData(formData);
+    formData.append("currentItem", sessionStorage.getItem("currentItem"));
     if (validateProductForm()) {
         console.log("failed")
         showCreateEmptyWarn();
     }
     else {
-        fetch("/products/add_new", {
-            method: 'POST',
+        fetch("/products/updateProduct", {
+            method: 'PUT',
             body: formData
         }).then((res) => {
             if (res.ok) {
-                console.log("Successfully writed.");
+                // console.log("Successfully writed.");
                 closeProdForm();
                 refreshProducts();
+                console.log("edited")
             }
             else {
                 console.log("error occured while sending add_new data");
