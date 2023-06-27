@@ -8,7 +8,8 @@ homeRouter.get('/', (req, res) => {
     // res.set('Content-Type', 'text/html');
     // res.sendFile(path.resolve() + "/public/main.html");
     console.log("root req")
-    res.render(path.resolve() + "/public/main");
+    // res.render(path.resolve() + "/public/ejs/main");
+    res.render("main");
     // res.send("hello");
   });
 

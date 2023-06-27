@@ -13,6 +13,8 @@ const PORT = 7777;
 const __dirname = path.resolve();
 
 app.set("view engine", "ejs");
+app.set("views", path.resolve(__dirname, "public/ejs"));
+// app.set("views", __dirname + "/public/ejs");
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
