@@ -7,9 +7,13 @@ homeRouter.get('/', (req, res) => {
   // console.log(req.query, "root request");
     // res.set('Content-Type', 'text/html');
     // res.sendFile(path.resolve() + "/public/main.html");
+    
     console.log("root req")
     // res.render(path.resolve() + "/public/ejs/main");
-    res.render("main");
+    // console.log(req.session.user)
+    res.render("main", {
+      session: req.session
+    });
     // res.send("hello");
   });
 

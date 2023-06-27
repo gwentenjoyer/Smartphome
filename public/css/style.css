@@ -4,17 +4,20 @@
 .navbar-brand:hover{
     color: #ffda6a;
 }
-.cart, .user_sign{
-    /* background-color: #ffffff; */
+/* .cart, .user_sign{
     padding: 2px;
     border-radius: 3px;
-    /* -webkit-filter: invert(1);
-    filter: invert(1); */
-    /* background-color: red; */
 }
-.cart:hover, .user_sign:hover{
-    /* background-color: #212529; */
-    
+.cart:hover, .user_sign:hover{    
+    background-color: #adb5bd;
+    padding: 2px;
+    border-radius: 3px;
+} */
+.options{
+    padding: 2px;
+    border-radius: 3px;
+}
+.options:hover{
     background-color: #adb5bd;
     padding: 2px;
     border-radius: 3px;

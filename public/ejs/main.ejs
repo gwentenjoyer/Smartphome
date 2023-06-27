@@ -31,17 +31,30 @@
                     </div>
                     <div class="icons d-flex flex-row me-3">
 
-                        <div class="creation me-2" id="clickable-div-create" type="button">
+                        <div class="options me-2" id="clickable-div-create" type="button">
                             <img src="./img/create_light.png" alt="cart.png" class="cart_img" width="32px">
                         </div>
 
-                        <div class="cart me-2" id="clickable-div-cart" type="button">
+                        <div class="options me-2" id="clickable-div-cart" type="button">
                             <img src="./img/cart_pic_light.png" alt="cart.png" class="cart_img" width="32px">
                         </div>
 
-                        <div class="user_sign" id="clickable-div-account" type="button">
-                            <img src="./img/profile_pic_light.png" alt="profile.png" class="cart_img" width="32px">
-                        </div>
+
+                        <% if(!session.user) { %>
+                            <div class="options me-2" id="clickable-div-account" type="button">
+                                <img src="./img/profile_pic_light.png" alt="profile.png" class="cart_img" width="32px">
+                            </div>
+                            <%} else {%>
+                                <%if(session.user.isAdmin === true){%>
+                                    <div class="options me-2" id="clickable-div-settings" type="button">
+                                        <img src="./img/settings_light.png" alt="settings.png" class="cart_img" width="32px">
+                                    </div>
+                                <%}%>
+                                <div class="options me-2" id="clickable-div-logout" type="button">
+                                    <img src="./img/logout_light.png" alt="settings.png" class="cart_img" width="32px">
+                                </div>
+                        <%}%>
+
                     </div>
                 </div>
             </nav>
@@ -112,25 +125,10 @@
 
                     <div class="cards-container d-flex flex-wrap mt-1" id="cards_container">
 
-                        
+
                     </div>
                 </div>
             </div>
-            <!-- <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">2</span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav> -->
         </div>
 
 
@@ -194,7 +192,6 @@
                             <label for="user_pass_login" class="sidebar-text mt-3"><b>Password</b></label>
                             <input type="password" class="user_data_input" placeholder="Enter Password"
                                 id="user_pass_login" required>
-                            <!-- <p id="error-text-log" style="color:#a80101;margin: 0;display: none"></p> -->
                             <p id="error-text-log" class="text-danger">Error message here.</p>
                         </div>
                     </div>
@@ -262,10 +259,6 @@
 
                 <form name="productForm" id="idProductForm" action="/products/add_new" enctype="multipart/form-data"
                     method="post">
-                    <!-- <input type="hidden" name="productId" id="productId">
-                <input type="hidden" name="oldCloudinaryPublicId" id="oldCloudinaryPublicId">
-                <input type="hidden" name="oldImagePath" id="oldImagePath"> -->
-                    <table class="form-table">
                         <div class="modal-body d-flex flex-column align-items-center">
                             <table id="product-info-table">
                                 <tr>
@@ -301,7 +294,6 @@
                                             <option value="6.5">6.5"</option>
                                             <option value="6.6">6.6"</option>
                                         </select>
-                                        <!-- <input type="text" id="textBox" readonly> -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -311,12 +303,6 @@
                                     <td>
                                         <input type="text" class="form-control" placeholder="Processor" name="cpu"
                                             id="product-info-processor" aria-describedby="addon-wrapping">
-                                        <!-- <select id="product-info-processor" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select> -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -324,8 +310,8 @@
                                         <label for="product-info-ram" class=""><b>RAM</b></label>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" placeholder="RAM" id="product-info-ram"
-                                            name="ram" aria-describedby="addon-wrapping">
+                                        <input type="number" class="form-control" placeholder="RAM"
+                                            id="product-info-ram" name="ram" aria-describedby="addon-wrapping">
                                     </td>
                                 </tr>
                                 <tr>
@@ -333,8 +319,8 @@
                                         <label for="product-info-rom" class=""><b>ROM</b></label>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" placeholder="Embedded memory" name="rom"
-                                            id="product-info-rom" aria-describedby="addon-wrapping">
+                                        <input type="number" class="form-control" placeholder="Embedded memory"
+                                            name="rom" id="product-info-rom" aria-describedby="addon-wrapping">
                                     </td>
                                 </tr>
                                 <tr>
@@ -364,8 +350,8 @@
                             </table>
                             <div class="" id="emptyfield" style="color:red; display:none">Fields cannot be empty!</div>
                         </div>
-                        <div class="modal-footer d-flex flex-row justify-content-center" id="product-info-button-container">
-                            <!-- <button type="button" class="btn btn-primary" id="product-info-submit">Save changes</button> -->
+                        <div class="modal-footer d-flex flex-row justify-content-center"
+                            id="product-info-button-container">
                         </div>
                 </form>
             </div>
@@ -374,87 +360,96 @@
 
 
     <div class="modal-local" id="modal-product-view">
-        <div class="modal-content center flex-row justify-content-around" style="width:600px; height: 400px; padding: 10px 5px;">
+        <div class="modal-content center flex-row justify-content-around"
+            style="width:600px; height: 400px; padding: 10px 5px;">
             <div class="modal-header">
-                <img id="product-view-picture-preview" src="#"  style="max-width: 400px; max-height: 380px;" alt="preview" />
+                <img id="product-view-picture-preview" src="#" style="max-width: 400px; max-height: 380px;"
+                    alt="preview" />
             </div>
             <div>
-                <!-- <table class="form-table"> -->
-                    <div class="modal-body d-flex flex-column align-items-center">
-                        <table id="product-info-table" >
-                            <tr>
-                                <td>
-                                    <b>Manufacturer</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-manufacturer"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Model</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-model"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Diagonal, inches</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-diagonal"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Processor</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-cpu"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>RAM</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-ram"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>ROM</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-rom"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Price</b>
-                                </td>
-                                <td style="padding: 0 10px">
-                                    <span id="product-view-price"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="modal-footer d-flex flex-row justify-content-around">
-                                        <button type="button" class="btn btn-success" id="product-view-buy">Buy</button>
-                                        <button type="button" class="btn btn-warning" id="product-view-edit">Edit</button>
-                                        <button type="button" class="btn btn-danger" id="product-view-delete">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <span hidden id="product-view-id"></span>
-                    </div>
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <table id="product-view-table">
+                        <tr>
+                            <td>
+                                <b>Manufacturer</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-manufacturer"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Model</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-model"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Diagonal, inches</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-diagonal"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Processor</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-cpu"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>RAM</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-ram"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>ROM</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-rom"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Price</b>
+                            </td>
+                            <td style="padding: 0 10px">
+                                <span id="product-view-price"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="modal-footer d-flex flex-row justify-content-around">
+                                    <button type="button" class="btn btn-success" id="product-view-buy">Buy</button>
+                                    <button type="button" class="btn btn-warning" id="product-view-edit">Edit</button>
+                                    <button type="button" class="btn btn-danger"
+                                        id="product-view-delete">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <span hidden id="product-view-id"></span>
+                </div>
             </div>
         </div>
     </div>
 
+    <% if(!session.user) { %>
 
+        <%} else {%>
+            <%if(session.user.isAdmin === true){%>
+
+            <%}%>
+
+    <%}%>
     <script src="/js/frontend/script.js"></script>
     <script src="/js/frontend/login_modal.js"></script>
     <script src="/js/frontend/product_modal.js"></script>

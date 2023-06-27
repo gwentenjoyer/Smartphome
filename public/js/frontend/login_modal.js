@@ -28,6 +28,7 @@ document.getElementById("submit_login").addEventListener("click", (event) => {
         }).then((res) => {
             switch (res.status){
                 case 204: console.log("loged successfully");
+                          window.location.href = '/';
                     break;
                 case 404: showLogError("This account does not exists.");
             }
@@ -81,6 +82,7 @@ document.getElementById("submit_signup").addEventListener("click", (event) => {
         }).then((res) => {
             if (res.status == 201) {
                 console.log("New account registered.");
+                // window.location.href = '/';
             }
             else if (res.status === 403){
                 showRegError("Account already exists!");
