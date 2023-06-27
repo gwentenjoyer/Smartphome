@@ -82,7 +82,7 @@ document.getElementById("submit_signup").addEventListener("click", (event) => {
         }).then((res) => {
             if (res.status == 201) {
                 console.log("New account registered.");
-                // window.location.href = '/';
+                window.location.href = '/';
             }
             else if (res.status === 403){
                 showRegError("Account already exists!");

@@ -1,11 +1,3 @@
-document.getElementById("navbar-search-button").addEventListener("click", () =>{
-  fetch("/auth/logout", {
-    method: "POST"
-  })
-  .then(res => {
-    window.location.href = '/';
-  })
-});
 let modal_product_view = document.getElementById("modal-product-view");
 const cards_container = document.getElementById('cards_container');
 async function refreshProducts (event) {
@@ -62,49 +54,34 @@ function openModal() {
   modal.style.display = 'block';
 }
 
-const error_text_log = document.getElementById("error-text-log");
-const error_text_reg = document.getElementById("error-text-reg");
-
-document.getElementById("product-view-delete").addEventListener("click", () => {
-  const delElementId = document.getElementById("product-view-id").innerHTML;
-  // console.log(delElementId);
-  fetch("/products/deleteProduct", {
-    method: 'DELETE',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({delElementId})
-  }).then((res) => {
-    if (res.ok) {
-      modal_product_view.style.display = "none";
-      console.log("Successfully deleted product.")
-      refreshProducts();
-    }
-    else {console.log("error emmited while deleting")}
-    })
-});
-
-
-let allModals = document.getElementsByClassName("modal-local");
-let closeButtons = document.getElementsByClassName('modal-button-close');
+// let closeButtons = document.getElementsByClassName('modal-button-close');
 
 let account_modal = document.getElementById("account-modal");
-document.getElementById("clickable-div-account").addEventListener("click",
-  // (event) => { account_modal.style.display = "block"; });
-  (event) => { account_modal.style.display = "flex"; });
+
+function searchProduct(value){
+  let block = document.querySelectorAll(".productInstance");
+  if(value !== ''){
+      block.forEach((names)=>{
+          if(names.childNodes[3].childNodes[1].textContent.toLowerCase().search(value) === -1 && names.childNodes[3].childNodes[1].textContent.search(value) === -1){
+              names.parentNode.style.display = "none"
+          }else if(names.childNodes[3].childNodes[1].textContent.search(value) === -1){
+              names.parentNode.style.display = "block"
+          }else{
+              names.parentNode.style.display = "block"
+          }
+      })
+  }else{
+      block.forEach((names)=>{
+          names.parentNode.style.display = "block"
+      })
+  }
+}
+
 
 document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
   (event) => { closeAccountModal(); });
 document.getElementsByClassName("modal-button-close")[1].addEventListener("click",
   (event) => { closeAccountModal(); });
-
-// for (el of closeButtons) {
-//   el.addEventListener("click", (event) => {
-//     for (elem of allModals) {
-//       elem.style.display = "none";
-//     }
-//   })
-// }
 
 window.onclick = function (event) {
   switch (event.target) {
@@ -125,10 +102,6 @@ window.onclick = function (event) {
 }
 
 let cart_modal = document.getElementById("cart-modal");
-document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
-  // cart_modal.style.display = "block";
-  cart_modal.style.display = "flex";
-});
 document.getElementsByClassName("btn-close")[0].addEventListener("click", (e) => {
   cart_modal.style.display = "none";
 });
@@ -154,7 +127,6 @@ prodPicInp.onchange = evt => {
 let product_info_picture_input = document.getElementById("product-info-picture");
 // let product_info_submit = document.getElementById("product-info-submit");
 let emptyFieldAlarm = document.getElementById("emptyfield");
-let product_view_edit = document.getElementById("product-view-edit");
 
 function showCreateEmptyWarn() {   // bool here?
   emptyFieldAlarm.style.display = "block";
