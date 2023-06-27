@@ -12,6 +12,8 @@ const app = express();
 const PORT = 7777;
 const __dirname = path.resolve();
 
+app.set("view engine", "ejs");
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 app.use(bodyParser.json({limit: '5mb'}));
