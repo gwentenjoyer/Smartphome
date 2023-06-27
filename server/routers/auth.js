@@ -18,7 +18,7 @@ authRouter.post("/login", async (request, response) => {
         user_password:account.user_password,
         isAdmin:account.isAdmin
     }
-    response.sendStatus(200);
+    response.sendStatus(204);
 });
 
 authRouter.post("/signup", async (request, response) => {
@@ -38,7 +38,7 @@ authRouter.post("/signup", async (request, response) => {
             user_password:newAccount.user_password,
             isAdmin:newAccount.isAdmin
         }
-        return response.sendStatus(200);
+        return response.sendStatus(201);
     } catch (error) {
         if (error.code === 11000) {
             return response.sendStatus(403);    // account already exists
@@ -48,10 +48,16 @@ authRouter.post("/signup", async (request, response) => {
     }
     }
 });
-authRouter.get("/", (req, res) => {
-    console.log("hhaha loser");
-    res.set('Content-Type', 'text/html');
-    res.sendFile(path.resolve() + "/index.html");
-    console.log(req.query);
-  });
+// authRouter.get("/", (req, res) => {
+//     console.log("hhaha loser");
+//     res.set('Content-Type', 'text/html');
+//     res.sendFile(path.resolve() + "/index.html");
+//     console.log(req.query);
+// });
+
+authRouter.post('/logout', async(request, response) => {
+    request.session.destroy();
+    response.sendStatus(204);
+})
+
 export default authRouter;

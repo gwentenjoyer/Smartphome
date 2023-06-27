@@ -1,4 +1,11 @@
-// document.getElementById("navbar-search-button").addEventListener("click");
+document.getElementById("navbar-search-button").addEventListener("click", () =>{
+  fetch("/auth/logout", {
+    method: "POST"
+  })
+  .then(res => {
+    window.location.href = '/';
+  })
+});
 let modal_product_view = document.getElementById("modal-product-view");
 const cards_container = document.getElementById('cards_container');
 async function refreshProducts (event) {
@@ -55,6 +62,9 @@ function openModal() {
   modal.style.display = 'block';
 }
 
+const error_text_log = document.getElementById("error-text-log");
+const error_text_reg = document.getElementById("error-text-reg");
+
 document.getElementById("product-view-delete").addEventListener("click", () => {
   const delElementId = document.getElementById("product-view-id").innerHTML;
   // console.log(delElementId);
@@ -84,9 +94,9 @@ document.getElementById("clickable-div-account").addEventListener("click",
   (event) => { account_modal.style.display = "flex"; });
 
 document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
-  (event) => { account_modal.style.display = "none"; });
+  (event) => { closeAccountModal(); });
 document.getElementsByClassName("modal-button-close")[1].addEventListener("click",
-  (event) => { account_modal.style.display = "none"; });
+  (event) => { closeAccountModal(); });
 
 // for (el of closeButtons) {
 //   el.addEventListener("click", (event) => {
@@ -99,7 +109,7 @@ document.getElementsByClassName("modal-button-close")[1].addEventListener("click
 window.onclick = function (event) {
   switch (event.target) {
     case account_modal:
-      account_modal.style.display = "none";
+      closeAccountModal();
       break;
     case cart_modal:
       cart_modal.style.display = "none";

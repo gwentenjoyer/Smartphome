@@ -172,7 +172,7 @@
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active yellow" style="color: #198754;" id="login-tab" data-bs-toggle="tab"
+                    <button class="nav-link active yellow" id="login-tab" data-bs-toggle="tab"
                         data-bs-target="#login-tab-pane" type="button" role="tab" aria-controls="login-tab-pane"
                         aria-selected="true">Log in</button>
                 </li>
@@ -194,7 +194,8 @@
                             <label for="user_pass_login" class="sidebar-text mt-3"><b>Password</b></label>
                             <input type="password" class="user_data_input" placeholder="Enter Password"
                                 id="user_pass_login" required>
-                            <p id="error-text-log" style="color:#a80101;margin: 0;display: none"></p>
+                            <!-- <p id="error-text-log" style="color:#a80101;margin: 0;display: none"></p> -->
+                            <p id="error-text-log" class="text-danger">Error message here.</p>
                         </div>
                     </div>
 
@@ -220,7 +221,7 @@
                             <label for="user_pass_rep_signup" class="sidebar-text mt-3"><b>Repeat Password</b></label>
                             <input type="password" class="user_data_input" placeholder="Repeat Password"
                                 id="user_pass_rep_signup" required>
-                            <p id="error-text" style="color:#a80101;margin: 0;display: none"></p>
+                            <p id="error-text-reg" class="text-danger">Error message here.</p>
                         </div>
                     </div>
                     <div class="modal-footer d-flex flex-row justify-content-around">

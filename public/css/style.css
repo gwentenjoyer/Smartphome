@@ -23,6 +23,20 @@
     /* width: 200px; */
     max-width: 220px;
 }
+.nav-tabs .nav-link.active {
+    color: #198754;
+}
+.nav-tabs .nav-link {
+    color: black;
+}
+#error-text-reg{
+    display:none;
+    margin: 0;
+}
+#error-text-log{
+    display:none;
+    margin: 0;
+}
 #carouselExampleInterval{
     max-height: 100px;
     overflow: hidden;
