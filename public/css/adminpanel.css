@@ -84,3 +84,12 @@
       border-radius: .3em;
       background-color: whitesmoke;
   }
+.cross-del-acc{
+    cursor: pointer;
+    font-size: 25px;
+}
+.cross-del-acc:hover{
+    background-color: #c6303e;
+    /* border: solid #c6303e 2px;
+    border-radius: 2px; */
+}

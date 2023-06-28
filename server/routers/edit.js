@@ -13,16 +13,11 @@ editRouter.get('/showUsers', async (request, response) =>{
 
 editRouter.post('/deleteUser', async (request, response) =>{
     try{
-        await SchemaUser.deleteOne({
+        const dbResp = await SchemaUser.deleteOne({
             user_email: request.body.user_email,
-            user_password: request.body.user_password,
-            isAdmin: request.body.isAdmin
-        }, (err)=>{
-            if(err){
-                console.log("deleteUser error", err);
-                throw err;
-            }
+            user_password: request.body.user_password
         })
+        console.log(dbResp);
         response.sendStatus(200);
     }catch (e){
         response.sendStatus(200);
@@ -41,7 +36,6 @@ editRouter.put('/updateUser', async (request, response) =>{
         }
         const dbResp = await SchemaUser.updateOne(oldData, updateData);
         if (!dbResp.acknowledged) return response.sendStatus(404);
-        console.log(dbResp, oldData, updateData);
         response.sendStatus(200);
     }catch (e){
         response.sendStatus(500);

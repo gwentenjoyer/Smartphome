@@ -19,7 +19,6 @@ function openCart(){
                 <td>${desiredObject.manufacturer}</td>
                 <td>${desiredObject.model}</td>
                 <td>${desiredObject.price}</td>
-                <td>close</td>
             </tr>
         `
         sum += desiredObject.price;
@@ -35,7 +34,6 @@ function openCart(){
     `
     table_cart.appendChild(lastRow);
     const btn = document.getElementById("button-order");
-    // btn.addEventListener("click", (e)=>{})
 }
 document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
     cart_modal.style.display = "flex"; 

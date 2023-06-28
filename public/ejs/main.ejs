@@ -23,10 +23,7 @@
                         <a class="navbar-brand white_text d-block" href="/">Smartphome</a>
                     </div>
                     <div class="search_form w-50">
-                        <!-- <form class="d-flex" role="search"> -->
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" oninput="searchProduct(this.value)">
-                            <!-- <button class="btn btn-outline-success" id="navbar-search-button" type="button">Search</button> -->
-                        <!-- </form> -->
                     </div>
                     <div class="icons d-flex flex-row me-3">
 
@@ -69,12 +66,6 @@
                     <div class="sidebar-title">
                         <b>Критерії вибору товару</b>
                         <hr>
-                        <!-- <span class="sidebar-parag-title">Наявність</span>
-                        <ul class="ul-presence sidebar-text">
-                            <li><a class="ul-span-presence1 sidebar-link">Усі товари</a></li>
-                            <li><a class="ul-span-presence2 sidebar-link">Є в наявності</a></li>
-                        </ul>
-                        <hr> -->
                         <table class="price sidebar-text">
                             <thead>
                                 <span class="sidebar-parag-title">Ціна</span>
@@ -92,11 +83,6 @@
                             </tr>
                         </table>
                         <hr>
-                        <!-- <span class="sidebar-parag-title">Виробник</span>
-                        <ul class="ul-presence sidebar-text">
-                            <li><a class="ul-span-presence1"></a>Apple</li>
-                            <li><a class="ul-span-presence2"></a>Samsung</li>
-                        </ul> -->
                         <select class="form-select" id="sortby" aria-label="Default select example" onchange="sortPhones()">
                             <option value="0">Часом добавлення</option>
                             <option value="1">Зростанням</option>
@@ -165,11 +151,9 @@
         </div>
     </div>
 
-
     <div class="modal-local  modal-account" id="account-modal">
 
         <div class="modal-content">
-
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -240,7 +224,6 @@
                 <h1 class="modal-title fs-5">Cart</h1>
                 <button type="button" class="btn-close"></button>
             </div>
-
 
             <div class="modal-body-cart d-flex flex-column align-items-center">
                 <% if(!user) { %>
@@ -369,7 +352,6 @@
         </div>
     </div>
 
-
     <div class="modal-local" id="modal-product-view">
         <div class="modal-content center flex-row justify-content-around"
             style="width:600px; height: 400px; padding: 10px 5px;">
@@ -439,7 +421,6 @@
                         <tr>
                             <td colspan="2">
                                 <div class="modal-footer d-flex flex-row justify-content-around">
-                                    <!-- <button type="button" class="btn btn-success" id="product-view-buy">Buy</button> -->
                                     <% if(user) { %>
                                             <%if(user.isAdmin === true){%>
                                                 <button type="button" class="btn btn-warning" id="product-view-edit">Edit</button>
