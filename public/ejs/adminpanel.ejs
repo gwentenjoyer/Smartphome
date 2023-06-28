@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/adminpanel.css">
     <title>Smartphome</title>
 </head>
 
@@ -22,43 +23,41 @@
                     <div class="logo ms-2 " role="button">
                         <a class="navbar-brand white_text d-block" href="/">Smartphome</a>
                     </div>
-                    <div class="search_form w-50">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" oninput="searchProduct(this.value)">
-                    </div>
+
                     <div class="icons d-flex flex-row me-3">
 
-                        <% if(!session.user) { %>
-                            <div class="options me-2" id="clickable-div-cart" type="button">
-                                <img src="./img/cart_pic_light.png" alt="cart.png" class="cart_img" width="32px">
-                            </div>
-                            <div class="options me-2" id="clickable-div-account" type="button">
-                                <img src="./img/profile_pic_light.png" alt="profile.png" class="cart_img" width="32px">
-                            </div>
-                        <%} else {%>
-                                <%if(session.user.isAdmin === true){%>
-                                    <div class="options me-2" id="clickable-div-create" type="button">
-                                        <img src="./img/create_light.png" alt="cart.png" class="cart_img" width="32px">
-                                    </div>
+                        <div class="options me-2" id="clickable-div-settings" type="button">
+                            <a href="/adminpanel">
+                                <img src="./img/settings_light.png" alt="settings.png" class="cart_img" width="32px"> 
+                            </a>
+                        </div>
 
-                                    <div class="options me-2" id="clickable-div-settings" type="button">
-                                        <img src="./img/settings_light.png" alt="settings.png" class="cart_img" width="32px">
-                                    </div>
-                                <%}else {%>
-                                    <div class="options me-2" id="clickable-div-cart" type="button">
-                                        <img src="./img/cart_pic_light.png" alt="cart.png" class="cart_img" width="32px">
-                                    </div>
-                                <%}%>
-                                <div class="options me-2" id="clickable-div-logout" type="button">
-                                    <img src="./img/logout_light.png" alt="settings.png" class="cart_img" width="32px">
-                                </div>
-                        <%}%>
-
+                        <div class="options me-2" id="clickable-div-logout" type="button">
+                            <img src="./img/logout_light.png" alt="settings.png" class="cart_img" width="32px">
+                        </div>
                     </div>
                 </div>
             </nav>
-
+            <button id="delete_user" style="float:left;cursor: pointer;border: none;width: 100px;height: 25px;background-color: red;color: black; margin-left: 5px;">Видалити</button>
+            <button id="cancel_user" style="float:left;cursor: pointer;border: none;width: 100px;height: 25px;background-color: grey;color: white; margin-left: 5px;display: none">Відмінити</button>
+            <button id="reduct_user" style="float:left;cursor: pointer;border: none;width: 100px;height: 25px;background-color: darkorange;color: black; margin-left: 5px;">Редагувати</button>
+            <button onclick="location.reload()" id="red_cancel_user" style="float:left;cursor: pointer;border: none;width: 100px;height: 25px;background-color: #12b71b;color: white; margin-left: 5px;display: none">Прийняти</button>
         </div>
         <div class="main">
+            <div class="table">
+                <table style="margin:auto">
+                    <thead>
+                      <tr>
+                        <th>№</th>
+                        <th>E-mail</th>
+                        <th>Password</th>
+                        <th>Admin</th>
+                      </tr>
+                    </thead>
+                  <tbody class="tbody">
+                  </tbody>
+                </table>
+            </div>
         </div>
 
 
@@ -85,22 +84,19 @@
                     Знайшли помилку?
                 </div>
                 <div class="sidebar-text">
-                    Що ж, вітаю Вас! Ми дуже раді, що за нами слідкують уважні відвідувачі, як Ви! Про помилку Ви можете
-                    повідомити за адресою bokuwaikitei@gmail.com
+                    Будь ласка, повідомне про неї повідомити за адресою bokuwaikitei@gmail.com
                 </div>
             </div>
         </div>
     </div>
 
 
-    <% if(session.user) { %>
-        <script src="/js/frontend/login_modal.js"></script>
-    <%}%>
-
-    <script src="/js/frontend/script.js"></script>
+    <script src="/js/frontend/logout.js"></script>
+    <script src="/js/frontend/adminpanel.js"></script>
+    <!-- <script src="/js/frontend/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
 </body>
 
 </html>

@@ -5,7 +5,7 @@ const homeRouter = Router();
 
 homeRouter.get('/', (req, res) => {
     res.render("main", {
-      session: req.session
+      user: req.session.user
     });
   });
 
@@ -13,7 +13,7 @@ homeRouter.get("/adminpanel", (req, res) => {
   if(req.session.user){
     if(req.session.user.isAdmin){
       res.render("adminpanel", {
-        session: req.session
+        user: req.session.user
       });
     }
     else{

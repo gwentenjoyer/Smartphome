@@ -122,3 +122,6 @@
 .productInstance:hover{
     cursor: pointer;
 }
+#table-cart td{
+    width: 100px;
+}

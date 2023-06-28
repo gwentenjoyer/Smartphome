@@ -15,36 +15,7 @@ async function refreshProducts (event) {
     sessionStorage.setItem("products", JSON.stringify(data));
     // console.log(sessionStorage.getItem("products"));
     // debugger;
-    cards_container.innerHTML = "";
-    for (let el of data) {
-      let card = document.createElement('div');
-      card.innerHTML = `
-        <div id="${el._id}" class="card m-1 d-flex flex-column align-items-center h-100 productInstance" style="width: 18rem;">
-          <div style="height: 390px;" class="d-flex justify-content-center">
-            <img src="${el.clPublicLink}"  style="max-width: 390px; object-fit: contain;" class="card-img-top" alt="phone_photo">
-          </div>
-          <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="card-title card-model-title">${el.manufacturer + " " + el.model}</h5>
-              <p class="card-text card-model-version">${el.price}грн.</p>
-              <!-- <a class="card-text card-model-version route-link" href="?id=${el._id}">${el.price}грн.</a> -->
-          </div>
-        </div>
-      `;
-      card.addEventListener("click", () => {
-        sessionStorage.setItem("currentItem", el._id);
-        modal_product_view.style.display = "flex";
-        document.getElementById("product-view-manufacturer").innerHTML = el.manufacturer;
-        document.getElementById("product-view-model").innerHTML = el.model;
-        document.getElementById("product-view-diagonal").innerHTML = el.diagonal;
-        document.getElementById("product-view-cpu").innerHTML = el.cpu;
-        document.getElementById("product-view-ram").innerHTML = el.ram;
-        document.getElementById("product-view-rom").innerHTML = el.rom;
-        document.getElementById("product-view-price").innerHTML = el.price;
-        document.getElementById("product-view-picture-preview").src = el.clPublicLink;
-        document.getElementById("product-view-id").innerHTML = el._id;  
-      });
-      cards_container.appendChild(card);
-    }
+    printProducts(data);
   })
 };
 refreshProducts();
@@ -138,4 +109,49 @@ function closeProdForm(){
   prodPicPrev.src = "#";
   modal_product_info.style.display = "none";
   emptyFieldAlarm.style.display = "none";
+}
+
+function sortPhones(){
+  const products = JSON.parse(sessionStorage.getItem("products"))
+  let value = document.getElementById("sortby").value;
+  if (value === "0") printProducts(products);
+  else if(value === "1"){
+    printProducts(products.sort((a, b) => a.price - b.price))
+  }
+  else{
+    printProducts(products.sort((a, b) => b.price - a.price))
+  }
+}
+
+function printProducts(prods){
+  cards_container.innerHTML = "";
+  for (let el of prods) {
+    let card = document.createElement('div');
+    card.innerHTML = `
+      <div id="${el._id}" class="card m-1 d-flex flex-column align-items-center h-100 productInstance" style="width: 18rem;">
+        <div style="height: 390px;" class="d-flex justify-content-center">
+          <img src="${el.clPublicLink}"  style="max-width: 390px; object-fit: contain;" class="card-img-top" alt="phone_photo">
+        </div>
+        <div class="card-body d-flex flex-column align-items-center">
+            <h5 class="card-title card-model-title">${el.manufacturer + " " + el.model}</h5>
+            <p class="card-text card-model-version">${el.price}грн.</p>
+            <!-- <a class="card-text card-model-version route-link" href="?id=${el._id}">${el.price}грн.</a> -->
+        </div>
+      </div>
+    `;
+    card.addEventListener("click", () => {
+      sessionStorage.setItem("currentItem", el._id);
+      modal_product_view.style.display = "flex";
+      document.getElementById("product-view-manufacturer").innerHTML = el.manufacturer;
+      document.getElementById("product-view-model").innerHTML = el.model;
+      document.getElementById("product-view-diagonal").innerHTML = el.diagonal;
+      document.getElementById("product-view-cpu").innerHTML = el.cpu;
+      document.getElementById("product-view-ram").innerHTML = el.ram;
+      document.getElementById("product-view-rom").innerHTML = el.rom;
+      document.getElementById("product-view-price").innerHTML = el.price;
+      document.getElementById("product-view-picture-preview").src = el.clPublicLink;
+      document.getElementById("product-view-id").innerHTML = el._id;  
+    });
+    cards_container.appendChild(card);
+  }
 }

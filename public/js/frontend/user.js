@@ -1,12 +1,3 @@
-document.getElementById("clickable-div-logout").addEventListener("click", () =>{
-fetch("/auth/logout", {
-    method: "POST"
-})
-.then(res => {
-    sessionStorage.clear();
-    window.location.href = '/';
-})
-});
 document.getElementById("product-view-buy").addEventListener("click", ()=>{
     const oldCart = JSON.parse(sessionStorage.getItem('cart')) || [];
     oldCart.push(document.getElementById("product-view-id").innerHTML); 
@@ -37,8 +28,8 @@ function openCart(){
     let lastRow = document.createElement('tr');
     lastRow.innerHTML = `
     <tr id="total-sum">
-        <td colspan="2">Total sum:</td>
-        <td >${sum}</td>
+        <td colspan="2"style="text-align:right; padding: 0px 10px;"><b>Total sum:</b></td>
+        <td class="text-success" style="font-weight:bold;">${sum}</td>
         <td></td>
     </tr>
     `
@@ -46,3 +37,7 @@ function openCart(){
     const btn = document.getElementById("button-order");
     // btn.addEventListener("click", (e)=>{})
 }
+document.getElementById("clickable-div-cart").addEventListener("click", (event) => {
+    cart_modal.style.display = "flex"; 
+    openCart()
+});

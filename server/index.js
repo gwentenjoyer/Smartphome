@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import authRouter from "./routers/auth.js"
 import homeRouter from "./routers/home.js"
 import prodRouter from "./routers/products.js"
+import editRouter from "./routers/edit.js"
 import session from "express-session";
 
 const app = express();
@@ -33,6 +34,7 @@ app.use(
 app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/products", prodRouter);
+app.use("/edit", editRouter);
 
 app.listen(PORT, () =>
   console.log(`Listening on http://127.0.0.1:${PORT}!`)
