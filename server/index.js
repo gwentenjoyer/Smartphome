@@ -8,9 +8,10 @@ import homeRouter from "./routers/home.js"
 import prodRouter from "./routers/products.js"
 import editRouter from "./routers/edit.js"
 import session from "express-session";
+import 'dotenv/config.js';
 
 const app = express();
-const PORT = 7777;
+const PORT =  process.env.PORT;
 const __dirname = path.resolve();
 
 app.set("view engine", "ejs");
