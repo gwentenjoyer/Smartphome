@@ -15,7 +15,6 @@ cloudinary.config({
 
 const options = {
     use_filename: true,
-    // unique_filename: true,
     overwrite: false,
     folder: destFolder
 };

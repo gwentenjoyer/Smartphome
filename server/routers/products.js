@@ -4,7 +4,6 @@ import fs from "fs";
 import multer from "multer";
 import * as cl from "../cloudinary.js"
 import SchemaProduct from "../bsSchemaProduct.js"
-// import mongoose from "../mongo.js"
 
 const _phone_blank_img = "https://res.cloudinary.com/dxsbqj6z1/image/upload/v1687559052/smartphome/phones/phone_blank.png";
 
@@ -34,7 +33,6 @@ homeRouter.post('/addNew', upload.single('image'), async (req, res) => {
             fs.unlink(req.file.path, (err) => {
                 if (err) {
                   console.error(err);
-                //   return;
                 }
                 console.log('File deleted successfully');
               });
@@ -47,17 +45,14 @@ homeRouter.post('/addNew', upload.single('image'), async (req, res) => {
         } catch (error) {
             res.status(500).send(error);
         }
-        // return res.send(req.body);
     }
 
 });
 
 homeRouter.put('/updateProduct', upload.single('image'), async (req, res) => {
-    // console.log(req.body, req.file);
     let newData = req.body;
     const currentId = newData.currentItem;
     delete newData.currentItem;
-    // console.log(newData, currentId)
     if (!req.body) return res.sendStatus(400);
     else {
         let newSecUrl;
@@ -70,13 +65,11 @@ homeRouter.put('/updateProduct', upload.single('image'), async (req, res) => {
             fs.unlink(req.file.path, (err) => {
                 if (err) {
                   console.error(err);
-                //   return;
                 }
                 console.log('File deleted successfully');
               });
               newData.clPublicLink = newSecUrl;
               let oldLink = (await SchemaProduct.findById(currentId)).clPublicLink;
-            //   oldLink = oldLink.clPublicLink;
               console.log("oldLink", oldLink);
               if (oldLink === _phone_blank_img){
                   console.log("blank image, skipping...")
@@ -89,17 +82,12 @@ homeRouter.put('/updateProduct', upload.single('image'), async (req, res) => {
         }
 
         try {
-            // console.log("newData", newData);
             const result = await SchemaProduct.findByIdAndUpdate(currentId, newData);
-            // console.log("result", result);
-            // await data.save();
-            // return res.send(data);
             return res.sendStatus(200);
         } catch (error) {
             console.log("error")
             res.status(404).send(error);
         }
-        // return res.send(req.body);
     }
 
 });
@@ -121,14 +109,11 @@ homeRouter.delete("/deleteProduct", async (req, res) => {
             console.log("blank image, skipping...")
         }
         else{
-            // const pattern = new RegExp(`${cl.destFolder}/[a-zA-Z_0-9]+`)
-            // const public_id = pattern.exec(imageLink)[0];
             const public_id = getPublicIdFromLink(imageLink);
             console.log("deleting image with public_id: ", public_id);
             const delImageResponse = await cl.deleteImage(public_id);
             console.log("result of deleting the image:", delImageResponse);
         }
-        // console.log(data)
         const delDataResponse = await SchemaProduct.findByIdAndDelete(id);
         console.log("deleted.")
         res.sendStatus(200);
@@ -145,7 +130,6 @@ function getPublicIdFromLink(link){
     let public_id ;
     if (execRes !== null){
         public_id = pattern.exec(link)[0];
-        // console.log(execRes);
         return public_id;
     }
     else{

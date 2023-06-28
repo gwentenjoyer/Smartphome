@@ -2,7 +2,6 @@ const product_view_edit = document.getElementById("product-view-edit");
 
 document.getElementById("product-view-delete").addEventListener("click", () => {
   const delElementId = document.getElementById("product-view-id").innerHTML;
-  // console.log(delElementId);
   fetch("/products/deleteProduct", {
     method: 'DELETE',
     headers: {
@@ -54,8 +53,6 @@ document.getElementById("clickable-div-create").addEventListener("click", (e) =>
 });
 
 document.getElementById("product-view-edit").addEventListener("click", (e) => {
-  // modal_product_info.style.display = "block";
-  // const
   modal_product_view.style.display = "none";
   modal_product_info_header.innerHTML = "Edit product";
   product_info_button_container.innerHTML = 
@@ -75,7 +72,6 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
             body: formData
         }).then((res) => {
             if (res.ok) {
-                // console.log("Successfully writed.");
                 closeProdForm();
                 refreshProducts();
                 console.log("edited")
@@ -101,20 +97,17 @@ document.getElementById("product-view-edit").addEventListener("click", (e) => {
 
 
 function prepareFormData(fdata){
-    // console.log("before", ...fdata);
       for (let [key, value] of fdata.entries()) {
         if (!(value instanceof File)) {
             fdata.set(key, value.trim());
         }
       }
-    //   console.log("before", ...fdata);
 }
 function validateProductForm(){
     const fdata = new FormData(document.getElementById('idProductForm'));
     let isEmptyFlag = false;
     fdata.delete("image");
     for (let value of fdata.values()) {
-        // console.log(value)
         if (value.trim() === "") {
             isEmptyFlag = true;
           break;

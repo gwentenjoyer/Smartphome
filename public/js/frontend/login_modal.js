@@ -46,7 +46,6 @@ function closeAccountModal(){
      error_text_log.style.display = "none";
      account_modal.style.display = "none";
      error_text_reg.style.display = "none"
-//   emptyFieldAlarm.style.display = "none";
 }
 function showLogError(errorText){
     error_text_log.style.display = "block";
@@ -57,7 +56,6 @@ function showRegError(errorText){
     error_text_reg.innerHTML = errorText;
 }
 document.getElementById("submit_signup").addEventListener("click", (event) => {
-    // console.log(user_email_signup_value, emailReg.test(user_email_signup_value))
     if (user_email_signup.value === "" || user_pass_signup.value === "" || user_pass_rep_signup.value === "") {
         showRegError("Fields cannot be empty!");
     }
@@ -92,5 +90,4 @@ document.getElementById("submit_signup").addEventListener("click", (event) => {
             }
         }).catch(err => console.log("Server's response: ", err));
     }
-    // account_modal.style.display = "none";
 });

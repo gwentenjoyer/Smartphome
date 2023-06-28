@@ -5,7 +5,6 @@ async function refreshProducts (event) {
     method: 'GET'
   }).then((res) => {
     if (res.ok) {
-      // console.log(res.body.json)
       return res.json()
     }
     else {
@@ -13,8 +12,6 @@ async function refreshProducts (event) {
     }
   }).then((data) => {
     sessionStorage.setItem("products", JSON.stringify(data));
-    // console.log(sessionStorage.getItem("products"));
-    // debugger;
     printProducts(data);
   })
 };
@@ -24,8 +21,6 @@ function openModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'block';
 }
-
-// let closeButtons = document.getElementsByClassName('modal-button-close');
 
 let account_modal = document.getElementById("account-modal");
 
@@ -48,7 +43,6 @@ function searchProduct(value){
   }
 }
 
-
 document.getElementsByClassName("modal-button-close")[0].addEventListener("click",
   (event) => { closeAccountModal(); });
 document.getElementsByClassName("modal-button-close")[1].addEventListener("click",
@@ -65,10 +59,6 @@ window.onclick = function (event) {
     case modal_product_view:
       modal_product_view.style.display = "none";
       break;
-    // case modal_product_info:
-    //   // modal_product_info.style.display = "none";
-    //   closeProdForm();
-    //   break;
   }
 }
 
@@ -96,10 +86,9 @@ prodPicInp.onchange = evt => {
 }
 
 let product_info_picture_input = document.getElementById("product-info-picture");
-// let product_info_submit = document.getElementById("product-info-submit");
 let emptyFieldAlarm = document.getElementById("emptyfield");
 
-function showCreateEmptyWarn() {   // bool here?
+function showCreateEmptyWarn() { 
   emptyFieldAlarm.style.display = "block";
 }  
 
