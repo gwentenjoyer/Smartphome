@@ -9,4 +9,20 @@ homeRouter.get('/', (req, res) => {
     });
   });
 
+homeRouter.get("/adminpanel", (req, res) => {
+  if(req.session.user){
+    if(req.session.user.isAdmin){
+      res.render("adminpanel", {
+        session: req.session
+      });
+    }
+    else{
+    res.sendStatus(403);
+    }
+  }
+  else{
+    res.sendStatus(403);
+  }
+});
+
 export default homeRouter;

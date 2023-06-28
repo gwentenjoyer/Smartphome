@@ -41,11 +41,14 @@
     margin: 0;
 }
 #carouselExampleInterval{
-    max-height: 100px;
+    max-width: 1200px;
+    /* width: 1200px; */
+    /* width: 1200px; */
     overflow: hidden;
 }
 .carousel-photo{
-    height: 100px;
+    height: 250px;
+    width: 1200px;
 }
 .sidebar-title{
     font-size: 18px;
